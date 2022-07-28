@@ -7,7 +7,7 @@ function App() {
   const API_KEY = `${process.env.REACT_APP_API_KEY}`;
 
   const api = {
-    baseurl: "http://api.openweathermap.org/geo/1.0/",
+    baseurl: "https://api.openweathermap.org/geo/1.0/",
   };
 
   const [search, setSearch] = useState("");
