@@ -1,10 +1,10 @@
 import React from "react";
 
-const Location = () => {
+const Location = ({ weather }) => {
   return (
     <div className="location">
       <div className="city" style={{ fontSize: "30px" }}>
-        <strong>Austin</strong>
+        <strong>{weather.name}</strong>
       </div>
     </div>
   );
