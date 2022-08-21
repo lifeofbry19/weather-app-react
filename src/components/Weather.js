@@ -1,6 +1,6 @@
 import React from "react";
 
-const Weather = ({ weather }) => {
+const Weather = ({ weather = {} }) => {
   return (
     <div className="weather">
       <div className="temp">

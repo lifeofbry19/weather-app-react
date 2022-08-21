@@ -1,9 +1,9 @@
 import React from "react";
 
-const Location = ({ weather }) => {
+const Location = ({ weather, isLoading }) => {
   return (
     <div className="location">
-      <div className="city" style={{ fontSize: "30px" }}>
+      <div className={isLoading ? "city hidden" : "city"}>
         <strong>{weather.name}</strong>
       </div>
     </div>
