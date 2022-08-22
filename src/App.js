@@ -1,22 +1,17 @@
 import Location from "./components/Location";
 import CurrentDate from "./components/CurrentDate";
 import Weather from "./components/Weather";
+import Search from "./components/Search";
 import React, { useState, useEffect } from "react";
 import Spinner from "./images/spinner.svg";
-import Forecast from "./components/Forecast";
-import Sun from "./images/sun.svg";
-import Moon from "./images/moon.svg";
+import BackgroundController from "./components/BackgroundController";
 
 function App() {
-  const API_KEY = `${process.env.REACT_APP_API_KEY}`;
-  const api = {
-    baseurl: "https://api.openweathermap.org/geo/1.0/",
-  };
-
   const [search, setSearch] = useState("");
   const [weather, setWeather] = useState({});
-  const [forecast, setForecast] = useState({});
+  // const [forecast, setForecast] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  // const [weatherFetched, setWeatherFetched] = useState(false);
   let weatherFetched;
   if (!weather.main) {
     weatherFetched = false;
@@ -25,56 +20,7 @@ function App() {
     console.log(weather);
   }
 
-  function handleInputEntered(e) {
-    if (e.key === "Enter") {
-      let arr = search.split(",");
-      console.log(arr);
-      const [city, state] = arr;
-      console.log(city, state);
-      getCoordsFromAPI(city, state);
-    }
-  }
-
-  function getCoordsFromAPI(city, state) {
-    setIsLoading(true);
-    setTimeout(() => {
-      fetch(
-        `${api.baseurl}direct?q=${city},${state},+1&limit=1&appid=${API_KEY}`
-      )
-        .then((response) => {
-          return response.json();
-        })
-        .then((coords) => {
-          console.log(coords);
-          const lat = coords[0]["lat"];
-          const lon = coords[0]["lon"];
-          getResults(lat, lon);
-          getForecast(lat, lon);
-          setIsLoading(false);
-        })
-        .catch((e) => {
-          console.log(e);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
-    }, 1000);
-  }
-
-  function getResults(lat, lon) {
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`
-    )
-      .then((res) => {
-        return res.json();
-      })
-      .catch((error) => console.error("There was an error fetching data"))
-      .then((data) => {
-        setWeather(data);
-      });
-  }
-
-  function getForecast(lat, lon) {
+  /*   function getForecast(lat, lon) {
     fetch(
       `api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`
     )
@@ -86,7 +32,7 @@ function App() {
         setForecast(data);
         console.log(forecast);
       });
-  }
+  } */
 
   return (
     <div
@@ -100,13 +46,12 @@ function App() {
         gap: "20px",
       }}
     >
-      <img className="sky-icon" src={Sun} alt="" />
-      <input
-        type="text"
-        placeholder="Search: city, state"
-        onKeyPress={handleInputEntered}
-        onChange={(e) => setSearch(e.target.value)}
-        value={search}
+      <BackgroundController weather={weather} />
+      <Search
+        search={search}
+        setWeather={setWeather}
+        setSearch={setSearch}
+        setIsLoading={setIsLoading}
       />
       <iframe
         className="spinner"

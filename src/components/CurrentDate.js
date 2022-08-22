@@ -35,7 +35,12 @@ const CurrentDate = () => {
   return (
     <div
       className="date"
-      style={{ fontSize: "20px", color: "white", marginBottom: "10px" }}
+      style={{
+        fontSize: "20px",
+        color: "white",
+        textShadow: "0px 0px 4px black",
+        marginBottom: "10px",
+      }}
     >
       <strong>
         <em>
