@@ -17,7 +17,6 @@ function App() {
     weatherFetched = false;
   } else {
     weatherFetched = true;
-    console.log(weather);
   }
 
   /*   function getForecast(lat, lon) {
@@ -35,36 +34,28 @@ function App() {
   } */
 
   return (
-    <div
-      className="main-wrapper"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "100px",
-        gap: "20px",
-      }}
-    >
+    <div className="main-wrapper">
       <BackgroundController weather={weather} />
-      <Search
-        search={search}
-        setWeather={setWeather}
-        setSearch={setSearch}
-        setIsLoading={setIsLoading}
-      />
-      <iframe
-        className="spinner"
-        src={isLoading ? Spinner : ""}
-        frameborder="0"
-      ></iframe>
-      {!isLoading ? (
-        <Location weather={weather} isLoading={isLoading} />
-      ) : (
-        <></>
-      )}
-      {!isLoading && weatherFetched ? <CurrentDate /> : <></>}
-      {!isLoading && weatherFetched ? <Weather weather={weather} /> : <></>}
+      <div className="weather-card">
+        <Search
+          search={search}
+          setWeather={setWeather}
+          setSearch={setSearch}
+          setIsLoading={setIsLoading}
+        />
+        <iframe
+          className="spinner"
+          src={isLoading ? Spinner : ""}
+          frameborder="0"
+        ></iframe>
+        {!isLoading ? (
+          <Location weather={weather} isLoading={isLoading} />
+        ) : (
+          <></>
+        )}
+        {!isLoading && weatherFetched ? <CurrentDate /> : <></>}
+        {!isLoading && weatherFetched ? <Weather weather={weather} /> : <></>}
+      </div>
     </div>
   );
 }

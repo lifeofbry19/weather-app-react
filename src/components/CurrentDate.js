@@ -1,7 +1,7 @@
 import React from "react";
 
 const CurrentDate = () => {
-  let now = new Date();
+  const now = new Date();
 
   const months = [
     "January",
@@ -33,15 +33,7 @@ const CurrentDate = () => {
   const year = now.getFullYear();
 
   return (
-    <div
-      className="date"
-      style={{
-        fontSize: "20px",
-        color: "white",
-        textShadow: "0px 0px 4px black",
-        marginBottom: "10px",
-      }}
-    >
+    <div className="date">
       <strong>
         <em>
           {weekday} {today} {month}, {year}
